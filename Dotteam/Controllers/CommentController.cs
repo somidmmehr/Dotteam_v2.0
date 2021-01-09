@@ -69,7 +69,7 @@ namespace Dotteam.Controllers
             if (ModelState.IsValid)
             {
                 commentModel.CreatedAt = DateTime.Now;
-                commentModel.State = "Show";
+                commentModel.State = "Shows";
                 _context.Add(commentModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
