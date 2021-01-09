@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Dotteam.Models.CommentModel>
+
+
+<hr />
+@if (Model.Count() > 0)
+{
+    <h2 class="mb-5">Latest Comments</h2>
+
+    @foreach (var comment in Model)
+    {
+        <div class="d-flex flex-row comment-row mb-5 p-4 bg-light">
+            <div class="pr-2"><img src="~/images/user_default.png" alt="user" width="50" class="rounded-circle"></div>
+            <div class="comment-text w-100">
+                <span class="float-right badge badge-secondary">@comment.CreatedAt.ToString("yyyy/MM/dd - HH:mm")</span>
+                <h6 class="small">@comment.Name (@comment.Email) says:</h6>
+                <p class="mb-3 pl-3">
+                    <span class="h5">@comment.Title; </span>
+                    @comment.Text
+                </p>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                    <div class="comment-footer">
+                        <button type="button" class="btn btn-cyan btn-sm">Edit</button> <button type="button" class="btn btn-success btn-sm">Publish</button> <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{ <h2>No Comments yet</h2>}

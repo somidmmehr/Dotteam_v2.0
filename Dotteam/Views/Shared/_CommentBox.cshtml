@@ -1,0 +1,43 @@
+﻿@model Dotteam.Models.CommentModel
+
+<hr />
+
+<h3 class="mb-4">Leave us a comment!</h3>
+
+<div name="comment-form">
+    <form id="comment_form" asp-controller="Comment" asp-action="Create" method="post">
+        <div class="row">
+            <input type="hidden" asp-for="PresentationId" />
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>*
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>*
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>*
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Text" class="control-label"></label>*
+            <textarea asp-for="Text" class="form-control"></textarea>
+            <span asp-validation-for="Text" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Dotteam.Models.PresentaionModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionShort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionLong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimatePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastChange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img class="img-thumbnail img-responsive" src="~/@item.Image" />
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionShort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionLong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastChange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" asp-route-name="@item.Name.Replace(" ", "-")">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" asp-route-name="@item.Name.Replace(" ", "-")">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" asp-route-name="@item.Name.Replace(" ", "-")">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
