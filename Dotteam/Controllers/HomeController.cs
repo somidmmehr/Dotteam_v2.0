@@ -23,6 +23,7 @@ namespace Dotteam.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.LastProject = _context.ProjectModel.OrderBy(x => x.Id).LastOrDefault();
             ViewBag.Projects = _context.ProjectModel.Take(5).ToList();
             return View();
         }

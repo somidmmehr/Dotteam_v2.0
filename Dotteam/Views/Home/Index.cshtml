@@ -1,19 +1,357 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "DOT Official Home Page";
+    ProjectModel LastProject = ViewBag.LastProject;
+    ICollection<ProjectModel> Projects = ViewBag.Projects;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Navbar {
+    <li><a class="page-scroll" href="#main">Home</a></li>
+    <li><a class="page-scroll" href="#services">Services</a></li>
+    <li><a class="page-scroll" href="#projects">Projects</a></li>
+    <li><a class="page-scroll" href="#reviews">Reviews</a></li>
+    <li><a class="page-scroll" href="#team">Team</a></li>
+    <li><a class="page-scroll" href="#pricing">Pricing</a></li>
+}
+
+
+<div class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-5">
+                <div class="intro">
+                    <h1 class="wow fadeInDown" data-wow-delay="0.1s"><span>DOT <br></span> building your virtual dreams...</h1>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Designing and Developing marvelous yet robust web application and services on the plattform of your choice!</p>
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-5">
+                <img class="img-responsive" src="~/icons/favicon.png" />
+            </div>
+        </div>
+    </div>
+</div><!-- Pi-Hero -->
+
+
+<div id="services" class="pi-points">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="points-intro text-center">
+                    <h1 class="wow fadeInDown">Implementing top techniques is our speciality!</h1>
+                </div>
+            </div>
+            <div class="col-sm-4 wow fadeInDown" data-wow-delay="0.1s">
+                <div class="point-icon">
+                    <img src="~/icons/1.png" width="45" alt="Feature">
+                </div>
+                <div class="point-text">
+                    <h1>Effective Connection</h1>
+                    <p>We remain connected to our customers even after the project ends to make sure for their approval and provide support and guidance. </p>
+                </div>
+            </div>
+            <div class="col-sm-4 wow fadeInDown" data-wow-delay="0.1s">
+                <div class="point-icon">
+                    <img src="~/icons/2.png" width="45" alt="Feature">
+                </div>
+                <div class="point-text">
+                    <h1>Contact us anytime</h1>
+                    <p>Our team is more than happy to hear from innovative and bright minds, so don't hesitate to contact us!</p>
+                </div>
+            </div>
+            <div class="col-sm-4 wow fadeInDown" data-wow-delay="0.2s">
+                <div class="point-icon">
+                    <img src="~/icons/3.png" width="45" alt="Feature">
+                </div>
+                <div class="point-text">
+                    <h1>Gorgeous App Design</h1>
+                    <p>Having an experienced UI/UX design team, we've got your needs covered. Presentation is as important as convenience!</p>
+                </div>
+            </div>
+            <div class="col-sm-4 wow fadeInDown" data-wow-delay="0.2s">
+                <div class="point-icon">
+                    <img src="~/icons/4.png" width="45" alt="Feature">
+                </div>
+                <div class="point-text">
+                    <h1>Update for Free</h1>
+                    <p>Our products will be updated regularly to improve user experince, security and performace which will be available with no additional costs.</p>
+                </div>
+            </div>
+            <div class="col-sm-4 wow fadeInDown" data-wow-delay="0.3s">
+                <div class="point-icon">
+                    <img src="~/icons/5.png" width="45" alt="Feature">
+                </div>
+                <div class="point-text">
+                    <h1>Economical Storage Space</h1>
+                    <p>We will provide you with fast and secure virtual storage space and hosts with reasonable price! you can change your plan anytime.</p>
+                </div>
+            </div>
+            <div class="col-sm-4 wow fadeInDown" data-wow-delay="0.3s">
+                <div class="point-icon">
+                    <img src="~/icons/6.png" width="45" alt="Feature">
+                </div>
+                <div class="point-text">
+                    <h1>Costomizable Feature</h1>
+                    <p>We will work with you on any level of experties and based on your budeget, be it a small houshold bussiness or a large company.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pitch-2">
+    <div class="container">
+        <div class="pitch-inner wow fadeInRight">
+            <h4>Why you need our services</h4>
+            <h1>Top performance with rational prices!</h1>
+            <p>
+                We will provide you with what you need to keep you bussiness exeptional and booming! Our advisors will help you succeed in your career.
+            </p>
+
+            <a class="btn btn-primary btn-action" asp-controller="Projects"><span>Learn more</span></a>
+        </div>
+    </div>
+</div>
+
+@if (LastProject != null)
+{
+    <div id="projects" class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="features-text wow fadeInDown p-5">
+                        <h1>Our Latest Project</h1>
+                        <h2>@LastProject.Name</h2>
+                        <p>@LastProject.DescriptionShort</p>
+                        <a class="btn btn-primary btn-action" asp-controller="Project" asp-action="Details" asp-route-id="@LastProject.Id"><span>Learn more</span></a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="features-image wow fadeInRight">
+                        <img class="img-responsive" src="~/images/LatestProject.jpg" alt="@LastProject.Name" style="border-top: 1px solid #7bd4ff;border-right: 1px solid #7bd4ff;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="pricing" class="pricing-v2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="intro wow fadeInDown" data-wow-delay="0.1s">
+                    <h4>Learn more about our Projects</h4>
+                    <h1>Projects</h1>
+                    <p>
+                        Our devotion to quality and performance is exceptional!
+                        We have  very fair pricing policy that would benefit you and us at the same time.
+                        Get your orders at top condition and in the least time.
+                        Every project comes with 1 month <span class="text-primary">FREE</span> support and <span class="text-primary">FREE</span> tutoring!
+                    </p>
+                    <p>Have something big? <a href="#">Contact us</a></p>
+                </div>
+            </div>
+            @if (Projects != null)
+            {
+                @foreach (var Project in Projects)
+                {
+                    <div class="col-sm-4 text-center">
+                        <div class="table-left wow fadeInDown project-holder" data-wow-delay="0.2s">
+                            <div class="project-details">
+                                <img src="~/icons/favicon.png" class="img-responsive img-circle" />
+                                <h2>@Project.Name</h2>
+                                <hr />
+                                <p>@Project.DescriptionShort</p>
+                                <hr />
+                                <a class="btn btn-primary btn-action btn-edge" asp-controller="Project" asp-action="Details" asp-route-id="@LastProject.Id">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
+<div id="reviews" class="review-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="reviews owl-carousel owl-theme">
+                    <div class="review-single">
+                        <img class="img-circle" src="~/icons/review-1.png" alt="Client Testimonoal" />
+                        <div class="review-text wow fadeInDown" data-wow-delay="0.2s">
+                            <p>Going to use some lorem here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis quis tellus ac vestibulum.  Etiam fermentum nisl ac venenatis rhoncus.</p>
+                            <h3>- Thomas Young</h3>
+                            <h3>Vice President Primal Inc</h3>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                        </div>
+                    </div>
+                    <div class="review-single">
+                        <img class="img-circle" src="~/icons/review-2.png" alt="Client Testimonoal" />
+                        <div class="review-text">
+                            <p>Going to use some lorem here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis quis tellus ac vestibulum.  Etiam fermentum nisl ac venenatis rhoncus.</p>
+                            <h3>- Neil Harris</h3>
+                            <h3>President Proton LLC</h3>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-ios-star-half"></i>
+                        </div>
+                    </div>
+                    <div class="review-single">
+                        <img class="img-circle" src="~/icons/review-3.png" alt="Client Testimonoal" />
+                        <div class="review-text">
+                            <p>Going to use some lorem here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis quis tellus ac vestibulum.  Etiam fermentum nisl ac venenatis rhoncus.</p>
+                            <h3>- Alison Burgers</h3>
+                            <h3>CEO Marga Holdings</h3>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-star"></i>
+                            <i class="ion ion-ios-star-half"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="team" class="pricing-v2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="points-intro text-center">
+                    <h1 class="wow fadeInDown">Meet Our Team Leaders</h1>
+                </div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <div class="table-left wow fadeInDown staff-holder" data-wow-delay="0.2s">
+                    <div class="staff-details">
+                        <img src="~/images/picT4.png" class="img-responsive img-circle" />
+                        <span>David</span>
+                        <p>dav.ramezani@gmail.com</p>
+                        <ul>
+                            <li>Android and iOs Developer </li>
+                            <li>Unity Programmer</li>
+                            <li>Currently at DNA Co.</li>
+                        </ul>
+                        <button class="btn btn-primary btn-action btn-edge" type="button"><span>Contact</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="table-left wow fadeInDown staff-holder" data-wow-delay="0.6s">
+                    <div class="staff-details">
+                        <img src="~/images/omid2.png" class="img-responsive img-circle" />
+                        <span>Omid</span>
+                        <p>s.omid.m.mehr@gmail.com</p>
+                        <ul>
+                            <li>Web Developer</li>
+                            <li>UI/UX Designer</li>
+                            <li>Curently at ITC</li>
+                        </ul>
+                        <button class="btn btn-primary btn-action btn-edge" type="button"><span>Contact</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="table-right wow fadeInDown staff-holder" data-wow-delay="0.4s">
+                    <div class="staff-details">
+                        <img src="~/images/picT3.jpg" class="img-responsive img-circle" />
+                        <span>Mostafa</span>
+                        <p>mostafa.mirzaie@ymail.com</p>
+                        <ul>
+                            <li>Web Developer</li>
+                            <li>PhD in Data Science</li>
+                            <li>Currently at FUM</li>
+                        </ul>
+                        <button class="btn btn-primary btn-action" type="button"><span>Contact</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="features" class="flex-split">
+    <div class="f-left p-4">
+        <div class="left-content wow fadeInLeft" data-wow-delay="0s">
+            <h2 class="wow fadeInDown" data-wow-delay="0.1s"><span>Urbane</span> Messaging now got the next level</h2>
+            <p class="wow fadeInDown" data-wow-delay="0.2s">
+                Just get the code and sit tight, you'll witness its power and performance in lead conversion.
+                Powerful and productive technology. Experience, then believe.
+            </p>
+            <a href="#" class="btn btn-action wow fadeInDown" data-wow-delay="0.3s"><span>Know More</span></a>
+        </div>
+    </div>
+    <div class="f-right">
+        <div id="5643257349">
+            <script type="text/JavaScript" src="https://www.aparat.com/embed/LEqyR?data[rnddiv]=5643257349&data[responsive]=yes"></script>
+        </div>
+        @*<div class="video-icon hidden-xs text-center">
+            <a class="popup wow fadeInUp" data-wow-delay="0.2s" href="https://www.aparat.com/embed/LEqyR?data[rnddiv]=43352848098&data[responsive]=yes"><i class="ion-ios-play"></i></a>
+        </div>*@
+    </div>
 </div>
 
 
-@if (ViewBag.Projects != null)
-{
-    @foreach (var project in (ViewBag.Projects as ICollection<Dotteam.Models.ProjectModel>))
-    {
-        <a class="h3" asp-controller="Project" asp-action="Details" asp-route-id="@project.Id" asp-route-name="@project.Name.Replace(" ","-")">@project.Name</a>
-        <br />
-    }
-}
+<div id="subscribe" class="cta-2">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <div class="cta-2-inner">
+                    <h1 class="wow fadeInDown" data-wow-delay="0.1s">Subscribe now and get lifetime premium access.</h1>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">
+                        Just kidding you have to pay every month or every year to get all the benefits
+                        we mentioned everywhere. Everything comes at a cost.
+                    </p>
+                    <div class="subform wow fadeInDown" data-wow-delay="0.3s">
+                        <form id="signup" class="formee" action="~/php/subscribe.php" method="post">
+                            <input name="email" id="email" type="text" /><input class="right inputnew" type="submit" title="Send" value="Subscribe" />
+                        </form>
+                        <div id="response"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div id="download" class="download">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="dwnld-inner text-center">
+                    <div class="app-img">
+                        <img class="img-circle wow fadeInUp" src="~/icons/favicon.png" width="80" alt="App Logo" />
+                    </div>
+                    <div class="app-info wow fadeInUp">
+                        <h1 class="wow fadeInUp">Download Root App</h1>
+                        <h4>
+                            Engane with Root app and Entertain yourself with its cool features <br class="hidden-xs"> and use free messenger
+                            to interact with friends.
+                        </h4>
+                        <i class="ion ion-star"></i>
+                        <i class="ion ion-star"></i>
+                        <i class="ion ion-star"></i>
+                        <i class="ion ion-star"></i>
+                        <i class="ion ion-star"></i>
+                        <span>(349)</span>
+                    </div>
+                    <div class="download-buttons wow fadeInUp">
+                        <a href="#"><img src="~/icons/appstore.png" width="150" alt="Download from App Store" /></a>
+                        <a href="#"><img src="~/icons/playstore.png" width="150" alt="Download from Play Store" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
