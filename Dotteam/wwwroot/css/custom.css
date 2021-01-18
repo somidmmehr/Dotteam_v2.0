@@ -496,11 +496,11 @@ table {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Nunito';
-  font-size: 16px;
+	font-size: 16px;
 }
 
 p {
-	font-family: 'Open Sans';
+	font-family: 'Nunito','Open Sans';
 	font-size: 14px;
 }
 
@@ -967,6 +967,32 @@ body {
 	margin-top: 20px;
 }
 
+
+.hero-3 {
+	padding: 100px 0 20px 0;
+	background: #FFFFFF;
+}
+
+.hero-3 .intro {
+	padding: 0 0 0 0;
+}
+
+.hero-3 .intro h1 {
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 1.1;
+	color: #333333;
+}
+
+.hero-3 .intro p {
+	font-size: 14px;
+	font-family: 'Nunito';
+	line-height: 1.4;
+	color: #848484;
+	max-width: initial;
+	margin-top: 20px;
+}
+
 .btn-action {
   padding: 0.5rem 1.5rem;
 	background:#673AB7;
@@ -974,7 +1000,7 @@ body {
 	border-color:#673AB7;
   border-radius: .125rem;
 	box-shadow: 0 10px 30px rgb(103, 58, 183, .5);
-	margin: 24px 12px 0 0;
+	margin: 24px 6px 0 6px;
 	-webkit-transition: 0.2s;
 	-moz-transition: 0.2s;
 	transition: 0.2s;
@@ -2238,6 +2264,10 @@ body {
 		font-size: 14px;
 	}
 
+	.hero-3 {
+		padding: 100px 0 50px 0;
+	}
+
 	.points-intro h1 {
 		font-size: 34px;
 	}
@@ -2292,6 +2322,10 @@ body {
 		padding: 100px 0 100px 0;
 	}
 
+	.navbar-nav #logoutForm {
+		border-left: 1px solid #b3b3b3;
+	}
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
@@ -2323,6 +2357,10 @@ body {
 
 	.hero-2 .intro p {
 		max-width: 300px;
+	}
+
+	.hero-3 {
+		padding: 50px 0 0 0;
 	}
 }
 

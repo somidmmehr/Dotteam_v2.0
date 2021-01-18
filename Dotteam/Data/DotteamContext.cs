@@ -29,5 +29,7 @@ namespace Dotteam.Data
             });
 
         }
+
+        public DbSet<Dotteam.Models.ProjectTechModel> ProjectTechModel { get; set; }
     }
 }

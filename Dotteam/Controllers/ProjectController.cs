@@ -4,16 +4,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dotteam.Data;
 using Dotteam.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Dotteam.Controllers
 {
     public class ProjectController : Controller
     {
         private readonly DotteamContext _context;
+        private readonly IWebHostEnvironment _env;
+        private readonly string _uploadDirectory;
+        private readonly string[] _permittedExtensions = { ".jpg", ".png", ".jpeg" };
+        private readonly long _fileSizeLimit;
 
-        public ProjectController(DotteamContext context)
+        [TempData]
+        public string Message { get; set; }
+
+        public ProjectController(DotteamContext context, IWebHostEnvironment env, IConfiguration config)
         {
             _context = context;
+            _env = env;
+            _uploadDirectory = Path.Combine(_env.WebRootPath, @"images\upload");
+            _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
         }
 
         // GET: Project
@@ -51,10 +67,47 @@ namespace Dotteam.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,DescriptionLong")] ProjectModel projectModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,DescriptionLong")] ProjectModel projectModel,
+                                                IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {
+
+                string fullFilePath = null;
+                string fileName = null;
+                string uploadDirectory = _uploadDirectory;
+                System.IO.Directory.CreateDirectory(uploadDirectory);
+
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    string fileExt = Path.GetExtension(imageFile.FileName).ToLowerInvariant();
+
+                    if (string.IsNullOrEmpty(fileExt) || !_permittedExtensions.Contains(fileExt))
+                    {
+                        Message = "Error : Invalid File Extension";
+                        return RedirectToAction("Edit", projectModel);
+                    }
+
+                    if (imageFile.Length > _fileSizeLimit)
+                    {
+                        Message = "Error : File max size must be 10MB";
+                        return View(projectModel);
+                    }
+
+                    do
+                    {
+                        fileName = Guid.NewGuid().ToString() + fileExt;
+                        fullFilePath = string.Format(@"{0}\{1}", uploadDirectory, fileName);
+                    } while (System.IO.File.Exists(fullFilePath));
+
+                    projectModel.Image = string.Format(@"{0}\{1}", @"images\upload", fileName);
+
+                    using (var stream = System.IO.File.Create(fullFilePath))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+                }
+
                 _context.Add(projectModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -83,7 +136,9 @@ namespace Dotteam.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DescriptionLong")] ProjectModel projectModel)
+        public async Task<IActionResult> Edit(int id,
+                                              [Bind("Id,Name,DescriptionShort,DescriptionLong,Image")] ProjectModel projectModel,
+                                              IFormFile imageFile)
         {
             if (id != projectModel.Id)
             {
@@ -92,6 +147,48 @@ namespace Dotteam.Controllers
 
             if (ModelState.IsValid)
             {
+                string fullFilePath = null;
+                string fileName = null;
+                string uploadDirectory = _uploadDirectory;
+                System.IO.Directory.CreateDirectory(uploadDirectory);
+
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    string fileExt = Path.GetExtension(imageFile.FileName).ToLowerInvariant();
+
+                    if (string.IsNullOrEmpty(fileExt) || !_permittedExtensions.Contains(fileExt))
+                    {
+                        Message = "Error : Invalid File Extension";
+                        return RedirectToAction("Edit",projectModel);
+                    }
+
+                    if (imageFile.Length > _fileSizeLimit)
+                    {
+                        Message = "Error : File max size must be 10MB";
+                        return View(projectModel);
+                    }
+
+                    if (projectModel.Image == null)
+                    {
+                        do
+                        {
+                            fileName = Guid.NewGuid().ToString() + fileExt;
+                            fullFilePath = string.Format(@"{0}\{1}", uploadDirectory, fileName);
+                        } while (System.IO.File.Exists(fullFilePath));
+
+                        projectModel.Image = string.Format(@"{0}\{1}", @"images\upload", fileName);
+                    }
+                    else
+                    {
+                        fullFilePath = string.Format(@"{0}\{1}", _env.WebRootPath, projectModel.Image);
+                    }
+
+                    using (var stream = System.IO.File.Create(fullFilePath))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+                }
+
                 try
                 {
                     _context.Update(projectModel);

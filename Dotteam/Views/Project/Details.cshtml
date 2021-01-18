@@ -1,32 +1,168 @@
 ﻿@model Dotteam.Models.ProjectModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "DOT | "+Model.Name+" project";
 }
 
-<h2>Details</h2>
+@section Navbar{
+    <li><a asp-controller="Home" asp-action="index">Home</a></li>
+    <li><a asp-action="index">Projects</a></li>
+    <li><a class="page-scroll" href="#about">About</a></li>
+    <li><a class="page-scroll" href="#presentation">Presentation</a></li>
+    <a href="#subscribe" class="btn btn-nav page-scroll wow fadeInDown" data-wow-delay="0.3s"><span>Order Now</span></a>
+}
 
-<div>
-    <h4>ProjectModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DescriptionLong)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescriptionLong)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<div id="main" class="main main-2">
+    <div class="hero-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-6">
+                    <div class="intro">
+                        <h1 class="wow fadeInDown" data-wow-delay="0.1s">@Html.DisplayFor(model => model.Name)</h1>
+                        <p class="wow fadeInDown" data-wow-delay="0.2s">@Html.DisplayFor(model => model.DescriptionShort)</p>
+                        <a asp-action="Index">Back to Projects</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {
+                            <hr />
+                            <a class="btn btn-warning " asp-action="Edit" asp-route-id="@Model.Id"><span class="ion ion-edit"></span> Edit</a>
+                            <a class="btn btn-danger " asp-action="Delete" asp-route-id="@Model.Id"><span class="ion ion-android-delete"></span> Delete</a>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-6">
+                    <img class="img-responsive m-auto" src="~/@Model.Image" alt="Feature">
+                </div>
+            </div>
+        </div>
+    </div><!-- Pi-Hero -->
 
-<hr/>
+
+
+    <div id="about" class="features-boxed">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="boxed-intro text-center wow fadeInDown">
+                        <h1>About @Html.DisplayFor(model => model.Name)</h1>
+                        <p>@Html.DisplayFor(model => model.DescriptionLong)</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 wow fadeInDown">
+                    <div class="box-inner">
+                        <div class="box-icon">
+                            <img class="img-responsive" src="~/icons/html5.png" alt="Feature">
+                        </div>
+                        <div class="box-info text-center">
+                            <h1>HTML 5</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-4 wow fadeInDown">
+                    <div class="box-inner">
+                        <div class="box-icon">
+                            <img class="img-responsive" src="~/icons/css3.png" alt="Feature">
+                        </div>
+                        <div class="box-info text-center">
+                            <h1>CSS 3</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-4 wow fadeInDown">
+                    <div class="box-inner">
+                        <div class="box-icon">
+                            <img class="img-responsive" src="~/icons/js5.png" alt="Feature">
+                        </div>
+                        <div class="box-info text-center">
+                            <h1>Javascript</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-4 wow fadeInDown">
+                    <div class="box-inner">
+                        <div class="box-icon">
+                            <img class="img-responsive" src="~/icons/php.png" alt="Feature">
+                        </div>
+                        <div class="box-info text-center">
+                            <h1>PHP</h1>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="presentation" class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="features-text wow fadeInDown">
+                        <h2 class="h2">[Projects presentation name]</h2>
+                        <p>[Projects presentation description]</p>
+                        <hr />
+                        <a class="btn btn-primary" href="presentation.html" type="button"><span>View</span></a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="features-image wow fadeInRight">
+                        <img class="img-responsive" src="~/images/oculus.png" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reviews" class="review-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="reviews owl-carousel owl-theme">
+                        <div class="review-single">
+                            <img class="img-circle" src="~/icons/review-1.png" alt="Client Testimonoal" />
+                            <div class="review-text wow fadeInDown" data-wow-delay="0.2s">
+                                <p>Going to use some lorem here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis quis tellus ac vestibulum.  Etiam fermentum nisl ac venenatis rhoncus.</p>
+                                <h3>- Thomas Young</h3>
+                                <h3>Vice President Primal Inc</h3>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                            </div>
+                        </div>
+                        <div class="review-single">
+                            <img class="img-circle" src="~/icons/review-2.png" alt="Client Testimonoal" />
+                            <div class="review-text">
+                                <p>Going to use some lorem here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis quis tellus ac vestibulum.  Etiam fermentum nisl ac venenatis rhoncus.</p>
+                                <h3>- Neil Harris</h3>
+                                <h3>President Proton LLC</h3>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-ios-star-half"></i>
+                            </div>
+                        </div>
+                        <div class="review-single">
+                            <img class="img-circle" src="~/icons/review-3.png" alt="Client Testimonoal" />
+                            <div class="review-text">
+                                <p>Going to use some lorem here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis quis tellus ac vestibulum.  Etiam fermentum nisl ac venenatis rhoncus.</p>
+                                <h3>- Alison Burgers</h3>
+                                <h3>CEO Marga Holdings</h3>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-star"></i>
+                                <i class="ion ion-ios-star-half"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
