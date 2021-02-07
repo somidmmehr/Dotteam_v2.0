@@ -11,12 +11,10 @@ namespace Dotteam.Data
         }
 
         public DbSet<Models.ProjectModel> ProjectModel { get; set; }
-
         public DbSet<Dotteam.Models.IssueModel> IssueModel { get; set; }
-
         public DbSet<Dotteam.Models.CommentModel> CommentModel { get; set; }
-
         public DbSet<Dotteam.Models.PresentaionModel> PresentaionModel { get; set; }
+        public DbSet<Dotteam.Models.TechModel> TechModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +27,5 @@ namespace Dotteam.Data
             });
 
         }
-
-        public DbSet<Dotteam.Models.ProjectTechModel> ProjectTechModel { get; set; }
     }
 }

@@ -10,7 +10,11 @@ namespace Dotteam.Models
     [Table("Projects")]
     public class ProjectModel
     {   
-        [Key()]
+        public ProjectModel()
+        {
+            this.Teches = new HashSet<TechModel>();
+        }
+
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -20,6 +24,6 @@ namespace Dotteam.Models
 
         public virtual ICollection<PresentaionModel> Presentations { get; set; }
         public virtual ICollection<IssueModel> Issues { get; set; }
-        public virtual ICollection<ProjectTechModel> ProjectTeches { get; set; }
+        public virtual ICollection<TechModel> Teches { get; set; }
     }
 }

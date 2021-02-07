@@ -40,7 +40,24 @@
                         <img class="img-responsive img-thumbnail mt-3" src="~/@Model.Image" alt="@Model.Name" />
                     </div>
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <label class="control-label">Used in teches:</label>
+                    @if (ViewBag.Teches != null)
+                    {
+                        <div class="row">
+                            @foreach (var tech in ViewBag.Teches as IEnumerable<Dotteam.Models.TechModel>)
+                            {
+                                <div class="form-check check-tech col-md-6">
+                                    <input name="techIds" class="form-check-input" type="checkbox" value="@tech.Id" id="@tech.Id" @(Model.Teches.Contains(tech)? "checked" : "")>
+                                    <label class="form-check-label" for="@tech.Id">
+                                        <img src="~/@tech.Image" height="40" class="img-responsive img-thumbnail" />
+                                        <span>@tech.Name</span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
             </div>
             <div>
                 <div class="form-group">

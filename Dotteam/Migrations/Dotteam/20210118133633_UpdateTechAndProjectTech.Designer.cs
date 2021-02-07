@@ -4,14 +4,16 @@ using Dotteam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dotteam.Migrations.Dotteam
 {
     [DbContext(typeof(DotteamContext))]
-    partial class DotteamContextModelSnapshot : ModelSnapshot
+    [Migration("20210118133633_UpdateTechAndProjectTech")]
+    partial class UpdateTechAndProjectTech
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,6 +153,28 @@ namespace Dotteam.Migrations.Dotteam
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("Dotteam.Models.ProjectTechModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TechId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("TechId");
+
+                    b.ToTable("ProjectTechModel");
+                });
+
             modelBuilder.Entity("Dotteam.Models.TechModel", b =>
                 {
                     b.Property<int>("Id")
@@ -170,22 +194,7 @@ namespace Dotteam.Migrations.Dotteam
 
                     b.HasKey("Id");
 
-                    b.ToTable("Techs");
-                });
-
-            modelBuilder.Entity("ProjectModelTechModel", b =>
-                {
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TechesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProjectsId", "TechesId");
-
-                    b.HasIndex("TechesId");
-
-                    b.ToTable("ProjectModelTechModel");
+                    b.ToTable("TechModel");
                 });
 
             modelBuilder.Entity("Dotteam.Models.CommentModel", b =>
@@ -227,19 +236,23 @@ namespace Dotteam.Migrations.Dotteam
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("ProjectModelTechModel", b =>
+            modelBuilder.Entity("Dotteam.Models.ProjectTechModel", b =>
                 {
-                    b.HasOne("Dotteam.Models.ProjectModel", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
+                    b.HasOne("Dotteam.Models.ProjectModel", "Project")
+                        .WithMany("ProjectTeches")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dotteam.Models.TechModel", null)
-                        .WithMany()
-                        .HasForeignKey("TechesId")
+                    b.HasOne("Dotteam.Models.TechModel", "Tech")
+                        .WithMany("ProjectTeches")
+                        .HasForeignKey("TechId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Tech");
                 });
 
             modelBuilder.Entity("Dotteam.Models.CommentModel", b =>
@@ -257,6 +270,13 @@ namespace Dotteam.Migrations.Dotteam
                     b.Navigation("Issues");
 
                     b.Navigation("Presentations");
+
+                    b.Navigation("ProjectTeches");
+                });
+
+            modelBuilder.Entity("Dotteam.Models.TechModel", b =>
+                {
+                    b.Navigation("ProjectTeches");
                 });
 #pragma warning restore 612, 618
         }

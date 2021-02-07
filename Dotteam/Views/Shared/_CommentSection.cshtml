@@ -8,11 +8,11 @@
 
     @foreach (var comment in Model)
     {
-        <div class="d-flex flex-row comment-row mb-5 p-4 bg-light">
+        <div class="d-flex flex-row comment-row mb-5 p-4">
             <div class="pr-2"><img src="~/images/user_default.png" alt="user" width="50" class="rounded-circle"></div>
             <div class="comment-text w-100">
                 <span class="float-right badge badge-secondary">@comment.CreatedAt.ToString("yyyy/MM/dd - HH:mm")</span>
-                <h6 class="small">@comment.Name (@comment.Email) says:</h6>
+                <h6 class="h6 small">@comment.Name (@comment.Email) says:</h6>
                 <p class="mb-3 pl-3">
                     <span class="h5">@comment.Title; </span>
                     @comment.Text

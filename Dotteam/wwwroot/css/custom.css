@@ -2467,5 +2467,23 @@ body {
 
  }
 
+.table-v-middle tr, .table-v-middle tr td{
+	vertical-align: middle !important;
+}
 
- 
+.check-tech label {
+	margin-bottom: 15px;
+	cursor: pointer !important;
+}
+.check-tech input, .check-tech label span {
+	margin-top: -30px;
+	vertical-align: middle;
+	display: inline-block;
+}
+.check-tech label img {
+	height: 40px;
+}
+
+.comment-row {
+	background: white;
+}

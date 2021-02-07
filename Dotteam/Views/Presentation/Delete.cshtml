@@ -4,66 +4,44 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>PresentaionModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DescriptionShort)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescriptionShort)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DescriptionLong)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescriptionLong)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimateTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EstimateTime)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatePrice)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EstimatePrice)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastChange)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastChange)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Project.Id)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="hero-3">
+    <div class="container">
+        <h2 class="h2">Delete</h2>
+        <h3 class="h3">Are you sure you want to delete this presentation?</h3>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 class="h3 mb-3">@Html.DisplayFor(model => model.Name)</h3>
+                    <p>@Html.DisplayFor(model => model.DescriptionShort)</p>
+                    <br />
+                    <p>@Html.DisplayFor(model => model.DescriptionLong)</p>
+                    <hr/>
+                    <table class="table table-striped">
+                        <tr>
+                            <td align="right" width="150px">Estimate Time</td>
+                            <td>@Html.DisplayFor(model => model.EstimateTime)</td>
+                        </tr>
+                        <tr>
+                            <td align="right">Estimate Price</td>
+                            <td>@Html.DisplayFor(model => model.EstimatePrice)</td>
+                        </tr>
+                        <tr>
+                            <td align="right">Project Name</td>
+                            <td>@Html.DisplayFor(model => model.Project.Name)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/@Html.DisplayFor(model => model.Image)" class="img-responsive img-thumbnail" />
+                </div>
+            </div>
+            <hr />
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-action="Index">Back to List</a>
+            </form>
+        </div>
+    </div>
 </div>

@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace Dotteam.Models
 {
-    public class ProjectTechModel
+    [Table("Techs")]
+    public class TechModel
     {
+        public TechModel()
+        {
+            this.Projects = new HashSet<ProjectModel>();
+        }
+
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
 
-        public int ProjectId { get; set; }
-        [ForeignKey("ProjectId")]
-        public virtual ProjectModel Project { get; set; }
+        public ICollection<ProjectModel> Projects { get; set; }
     }
 }

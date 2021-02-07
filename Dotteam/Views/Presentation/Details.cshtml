@@ -4,71 +4,111 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<div id="main" class="main main-2">
+    <div class="hero-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-6">
+                    <div class="intro" style="padding:0;">
+                        <h1 class="wow fadeInDown" data-wow-delay="0.1s">@Html.DisplayFor(model => model.Name)</h1>
+                        <p class="wow fadeInDown" data-wow-delay="0.2s">@Html.DisplayFor(model => model.DescriptionShort)</p>
+                        <p class="wow fadeInDown" data-wow-delay="0.2s">@Html.DisplayFor(model => model.DescriptionLong)</p>
+                        <a asp-action="Index">Back to Projects</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {
+                            <hr />
+                            <a class="btn btn-warning " asp-action="Edit" asp-route-id="@Model.Id"><span class="ion ion-edit"></span> Edit</a>
+                            <a class="btn btn-danger " asp-action="Delete" asp-route-id="@Model.Id"><span class="ion ion-android-delete"></span> Delete</a>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-6">
+                    <img class="img-responsive m-auto" src="~/@Model.Image" alt="Feature">
+                </div>
+            </div>
+        </div>
+    </div><!-- Pi-Hero -->
 
-<div>
-    <h4>PresentaionModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-            <img class="img-responsive img-thumbnail" width="200" src="~/@Model.Image" alt="@Model.Name" />
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DescriptionShort)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescriptionShort)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DescriptionLong)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescriptionLong)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimateTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EstimateTime)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatePrice)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EstimatePrice)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastChange)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastChange)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Project.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
 
-<section name="Comment">
-    <div name="comment-box">
-        <partial name="_CommentSection" model="@ViewBag.Comments" />
+    <div id="about" class="features-boxed">
+        <div class="container">
+            <section name="Comment">
+                <div name="comment-box">
+                    <partial name="_CommentSection" model="@ViewBag.Comments" />
+                </div>
+                <partial name="_CommentBox" model="new CommentModel() { Name = null, PresentationId = Model.Id };" />
+            </section>
+        </div>
     </div>
-    <partial name="_CommentBox" model="new CommentModel() { Name = null, PresentationId = Model.Id };" />
-</section>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/site.js"></script>
+}
+
+
+
+
+@*<h2>Details</h2>
+
+    <div>
+        <h4>PresentaionModel</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+                <img class="img-responsive img-thumbnail" width="200" src="~/@Model.Image" alt="@Model.Name" />
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Image)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionShort)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionShort)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionLong)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionLong)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EstimateTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EstimateTime)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EstimatePrice)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EstimatePrice)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastChange)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastChange)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Project)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Project.Id)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+

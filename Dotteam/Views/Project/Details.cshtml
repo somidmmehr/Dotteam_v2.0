@@ -1,7 +1,7 @@
 ﻿@model Dotteam.Models.ProjectModel
 
 @{
-    ViewData["Title"] = "DOT | "+Model.Name+" project";
+    ViewData["Title"] = "DOT | "+Model.Name+" project";;
 }
 
 @section Navbar{
@@ -47,49 +47,23 @@
                         <p>@Html.DisplayFor(model => model.DescriptionLong)</p>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-4 wow fadeInDown">
-                    <div class="box-inner">
-                        <div class="box-icon">
-                            <img class="img-responsive" src="~/icons/html5.png" alt="Feature">
-                        </div>
-                        <div class="box-info text-center">
-                            <h1>HTML 5</h1>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-3 col-sm-4 wow fadeInDown">
-                    <div class="box-inner">
-                        <div class="box-icon">
-                            <img class="img-responsive" src="~/icons/css3.png" alt="Feature">
+                @if (Model.Teches != null)
+                {
+                    @foreach (var tech in Model.Teches)
+                    {
+                        <div class="col-md-3 col-sm-4 wow fadeInDown">
+                            <div class="box-inner">
+                                <div class="box-icon">
+                                    <img class="img-responsive" src="~/@tech.Image" alt="Feature">
+                                </div>
+                                <div class="box-info text-center">
+                                    <h1>@tech.Name</h1>
+                                </div>
+                            </div>
                         </div>
-                        <div class="box-info text-center">
-                            <h1>CSS 3</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-4 wow fadeInDown">
-                    <div class="box-inner">
-                        <div class="box-icon">
-                            <img class="img-responsive" src="~/icons/js5.png" alt="Feature">
-                        </div>
-                        <div class="box-info text-center">
-                            <h1>Javascript</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-4 wow fadeInDown">
-                    <div class="box-inner">
-                        <div class="box-icon">
-                            <img class="img-responsive" src="~/icons/php.png" alt="Feature">
-                        </div>
-                        <div class="box-info text-center">
-                            <h1>PHP</h1>
-                        </div>
-                    </div>
-                </div>
+                    }
+                }
 
             </div>
         </div>
