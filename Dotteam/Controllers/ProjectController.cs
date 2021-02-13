@@ -43,7 +43,9 @@ namespace Dotteam.Controllers
                 return NotFound();
             }
 
-            var projectModel = await _context.ProjectModel.Include(y => y.Teches)
+            var projectModel = await _context.ProjectModel
+                .Include(pr => pr.Teches)
+                .Include(pr => pr.Presentations).ThenInclude(pre => pre.Comments)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (projectModel == null)
             {

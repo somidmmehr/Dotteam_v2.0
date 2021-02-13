@@ -20,12 +20,16 @@
                     <div class="intro">
                         <h1 class="wow fadeInDown" data-wow-delay="0.1s">@Html.DisplayFor(model => model.Name)</h1>
                         <p class="wow fadeInDown" data-wow-delay="0.2s">@Html.DisplayFor(model => model.DescriptionShort)</p>
-                        <a asp-action="Index">Back to Projects</a>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                         {
+                            <h3 class="mt-5">Project Tools</h3>
                             <hr />
                             <a class="btn btn-warning " asp-action="Edit" asp-route-id="@Model.Id"><span class="ion ion-edit"></span> Edit</a>
                             <a class="btn btn-danger " asp-action="Delete" asp-route-id="@Model.Id"><span class="ion ion-android-delete"></span> Delete</a>
+
+                            <h3 class="mt-5">Presentation Tools</h3>
+                            <hr />
+                            <a class="btn btn-success" asp-action="Create" asp-controller="Presentation" asp-route-pid="@Model.Id"><span class="ion ion-android-create"></span> Create</a>
                         }
                     </div>
                 </div>
@@ -69,28 +73,65 @@
         </div>
     </div>
 
+    @if (Model.Presentations != null)
+    {
+        <div id="presentation" class="features">
+            <div class="container">
+                @foreach (var presentation in Model.Presentations as ICollection<Dotteam.Models.PresentaionModel>)
+                {
 
-    <div id="presentation" class="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="features-text wow fadeInDown">
-                        <h2 class="h2">[Projects presentation name]</h2>
-                        <p>[Projects presentation description]</p>
-                        <hr />
-                        <a class="btn btn-primary" href="presentation.html" type="button"><span>View</span></a>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="features-text wow fadeInDown">
+                                <h2 class="h2">@presentation.Name</h2>
+                                <p>@presentation.DescriptionShort</p>
+                                <hr />
+                                <a class="btn btn-primary" asp-controller="Presentation" asp-action="Details" asp-route-id="@presentation.Id" asp-route-name="@presentation.Name.Replace(" ","-")"><span class="ion ion-eye"></span> View</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="features-image wow fadeInRight">
+                                <img class="img-responsive" src="~/@presentation.Image" alt="Image">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="features-image wow fadeInRight">
-                        <img class="img-responsive" src="~/images/oculus.png" alt="Image">
-                    </div>
-                </div>
+
+                    @if (presentation.Comments != null)
+                    {
+                        <div class="row review-section">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div class="reviews owl-carousel owl-theme">
+
+                                    @foreach (var comment in presentation.Comments as ICollection<Dotteam.Models.CommentModel>)
+                                    {
+                                        <div class="review-single">
+                                            <img class="img-circle" src="~/images/user_default.png" alt="Client Testimonoal" />
+                                            <div class="review-text wow fadeInDown" data-wow-delay="0.2s">
+                                                <p>
+                                                    <span class="h5">@comment.Title; </span>
+                                                    @comment.Text
+                                                </p>
+                                                <h3>- @comment.Name</h3>
+                                                <h3>@comment.Email</h3>
+                                                <i class="ion ion-star"></i>
+                                                <i class="ion ion-star"></i>
+                                                <i class="ion ion-star"></i>
+                                                <i class="ion ion-star"></i>
+                                                <i class="ion ion-star"></i>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
             </div>
         </div>
-    </div>
+    }
 
-    <div id="reviews" class="review-section">
+    @*<div id="reviews" class="review-section">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
@@ -138,5 +179,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
+
 </div>
